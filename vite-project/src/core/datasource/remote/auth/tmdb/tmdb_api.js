@@ -31,6 +31,15 @@ export const tmdb_paths = {
             original: "/original"
         },
         url: "https://image.tmdb.org/t/p",
+    },
+    backdrop: {
+        sizes: {
+            w300: "/w300",
+            w780: "/w780",
+            w1280: "/w1280",
+            original: "/original",
+        },
+        url: "http://image.tmdb.org/t/p",
     }
     }
 }

@@ -1,76 +1,93 @@
 import React from "react";
 import { useAuth } from "../../../core/auth/hook/use_auth";
 import { AppSwipper } from "../../../core/components/app_swiper/app_swipper";
-import AppSwiperSlide from "../../../core/components/app_swiper/components/app_swipper_slide";
-import { getPopularMovies } from "../services/movies.services";
+import useSWR from "swr";
+import {
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+  getPopularTv,
+  getTopRatedTv,
+} from "../services/movies.services";
+import AppCarouselSection from "../../../core/components/app_carousel_section/app_carousel_section";
 
 const HomeView = () => {
+  const {
+    data: popularMovies,
+    error: popularMoviesError,
+    isLoading: popularMoviesIsLoading,
+  } = useSWR("getPopularMovies", getPopularMovies);
+
+  const {
+    data: topRatedMovies,
+    error: topRatedMoviesError,
+    isLoading: topRatedMoviesIsLoading,
+  } = useSWR("getTopRatedMovies", getTopRatedMovies);
+
+  const {
+    data: UpcomingMovies,
+    error: UpcomingMoviesError,
+    isLoading: UpcomingMoviesIsLoading,
+  } = useSWR("getUpcomingMovies", getUpcomingMovies);
+
+  const {
+    data: popularTv,
+    error: popularTvError,
+    isLoading: popularTvIsLoading,
+  } = useSWR("getPopularTv", getPopularTv);
+
+  const {
+    data: topRatedTv,
+    error: topRatedTvError,
+    isLoading: topRatedTvIsLoading,
+  } = useSWR("getTopRatedTv", getTopRatedTv);
+
   const { isLoggedIn, login, logout } = useAuth();
 
-  console.log("isLoggedIn", isLoggedIn);
+  console.log(popularMovies);
 
-  getPopularMovies();
   return (
     <>
-      <h1>
-        Bienvenido de nuevo a <span style={{ color: "red" }}>Netflix</span>
-      </h1>
-      <button onClick={logout}>Cerrar sesión</button>
+      <main className="main_home">
+        <header className="header_home">
+          <nav className="nav_home">
+            
+            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png' width={100} height={30} alt="logo de netflix" />
+            <ul className="nav_list">
+              <li className="nav_item">Inicio</li>
+              <li className="nav_item">Series</li>
+              <li className="nav_item">Peliculas</li>
+              <li className="nav_item">Novedades populares</li>
+              <li className="nav_item">Mi lista</li>
+              <li className="nav_item">Explora por idiomas</li>
+            </ul>
+          
+            
+            <ul className="nav_buttons_list">
+              <li className="nav_buttons">Buscar</li>
+              <li className="nav_buttons">Niños</li>
+              <li className="nav_buttons">Notificaciones</li>
+              <button onClick={logout}>Cerrar sesión</button>
+              
+            </ul>
+          
+          </nav>
+         
+          
+        </header>
 
-      <div>
-        <h1>Peliculas mas vistas</h1>
-        <AppSwipper>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <AppSwiperSlide key={index}>
-              <div
-                style={{
-                  width: "250px",
-                  height: "150px",
-                  background: "red",
-                }}
-              >
-                <h3>{index +1}</h3>
-              </div>
-            </AppSwiperSlide>
-          ))}
-        </AppSwipper>
-      </div>
-      <div>
-        <h1>Series mas vistas</h1>
-        <AppSwipper>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <AppSwiperSlide key={index}>
-              <div
-                style={{
-                  width: "250px",
-                  height: "150px",
-                  background: "red",
-                }}
-              >
-                <h3>{index +1}</h3>
-              </div>
-            </AppSwiperSlide>
-          ))}
-        </AppSwipper>
-      </div>
-      <div>
-        <h1>Peliculas mejor puntuadas</h1>
-        <AppSwipper>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <AppSwiperSlide key={index}>
-              <div
-                style={{
-                  width: "250px",
-                  height: "150px",
-                  background: "red",
-                }}
-              >
-                <h3>{index +1}</h3>
-              </div>
-            </AppSwiperSlide>
-          ))}
-        </AppSwipper>
-      </div>
+        <AppCarouselSection
+          title={"Peliculas más populares"}
+          data={popularMovies}
+        />
+        <AppCarouselSection title={"Tendencias"} data={topRatedMovies} />
+        <AppCarouselSection
+          title={"Nuevos lanzamientos"}
+          data={UpcomingMovies}
+        />
+        <AppCarouselSection title={"Series más populares"} data={popularTv} />
+        <AppCarouselSection title={"Series mejor puntadas"} data={topRatedTv} />
+      </main>
     </>
   );
 };
