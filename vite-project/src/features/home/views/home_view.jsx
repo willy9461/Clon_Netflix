@@ -51,29 +51,32 @@ const HomeView = () => {
       <main className="main_home">
         <header className="header_home">
           <nav className="nav_home">
-            
-            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png' width={100} height={30} alt="logo de netflix" />
-            <ul className="nav_list">
-              <li className="nav_item">Inicio</li>
-              <li className="nav_item">Series</li>
-              <li className="nav_item">Peliculas</li>
-              <li className="nav_item">Novedades populares</li>
-              <li className="nav_item">Mi lista</li>
-              <li className="nav_item">Explora por idiomas</li>
-            </ul>
-          
-            
+            <div className="nav_left">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
+                width={100}
+                height={30}
+                alt="logo de netflix"
+              />
+              <ul className="nav_list">
+                <li className="nav_item">Inicio</li>
+                <li className="nav_item">Series</li>
+                <li className="nav_item">Peliculas</li>
+                <li className="nav_item">Novedades populares</li>
+                <li className="nav_item">Mi lista</li>
+                <li className="nav_item">Explora por idiomas</li>
+              </ul>
+            </div>
+
             <ul className="nav_buttons_list">
               <li className="nav_buttons">Buscar</li>
               <li className="nav_buttons">Niños</li>
               <li className="nav_buttons">Notificaciones</li>
-              <button onClick={logout}>Cerrar sesión</button>
-              
+              <button onClick={logout} className="btn_login">
+                Cerrar sesión
+              </button>
             </ul>
-          
           </nav>
-         
-          
         </header>
 
         <AppCarouselSection
