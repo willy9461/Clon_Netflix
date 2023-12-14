@@ -103,7 +103,7 @@ color: rgb(255, 255, 255);
  .btn_login {
   background-color: red;
   color: white;
-  border-radius: 10%;
+  border-radius: 5px;
   padding: .5em;
  }
 
@@ -141,7 +141,7 @@ color: rgb(255, 255, 255);
 .btn_comenzar {
   background-color: red;
   color: white;
-  border-radius: 10%;
+  border-radius: 10px;
   padding: .5em 2em;
   font-size: 1.5em;
   border: solid 2px white;
